@@ -1,0 +1,10 @@
+# Add to .gitignore
+echo "frontend.zip" >> .gitignore
+
+# Remove from Git tracking (keeps the file on disk)
+git rm --cached frontend.zip
+
+# Commit and push
+git add .gitignore
+git commit -m "Remove frontend.zip from tracking"
+git push
