@@ -1,0 +1,96 @@
+2026-01-19 01:46:22 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-01-19 01:46:22 - Started 11476
+2026-01-20 00:12:33 - Stopping scriptsmanagerbackend.exe
+2026-01-20 00:12:33 - ProcessKill 11476
+2026-01-20 00:12:34 - Shutdown exception
+Message:A system shutdown is in progress. (Exception from HRESULT: 0x8007045B)
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2026-01-20 04:42:49 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-01-20 04:42:49 - Started 5520
+2026-02-02 02:18:22 - Stopping scriptsmanagerbackend.exe
+2026-02-02 02:18:22 - ProcessKill 5520
+2026-02-02 02:18:22 - Shutdown exception
+Message:A system shutdown is in progress. (Exception from HRESULT: 0x8007045B)
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2026-02-02 02:18:58 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-02-02 02:18:59 - Started 5004
+2026-02-10 05:11:31 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-02-10 05:11:32 - Started 5616
+2026-02-16 06:09:21 - Stopping scriptsmanagerbackend.exe
+2026-02-16 06:09:21 - ProcessKill 5616
+2026-02-16 06:09:22 - Shutdown exception
+Message:A system shutdown is in progress. (Exception from HRESULT: 0x8007045B)
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2026-02-16 06:10:03 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-02-16 06:10:04 - Started 5532
+2026-02-28 19:15:18 - Stopping scriptsmanagerbackend.exe
+2026-02-28 19:15:18 - ProcessKill 5532
+2026-02-28 19:15:21 - Shutdown exception
+Message:A system shutdown is in progress. (Exception from HRESULT: 0x8007045B)
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2026-02-28 19:18:02 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-02-28 19:18:05 - Started 6452
+2026-02-28 19:19:08 - Stopping scriptsmanagerbackend.exe
+2026-02-28 19:19:08 - ProcessKill 6452
+2026-02-28 19:19:10 - Shutdown exception
+Message:A system shutdown is in progress. (Exception from HRESULT: 0x8007045B)
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2026-02-28 19:19:49 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-02-28 19:19:52 - Started 6224
+2026-02-28 19:28:40 - Stopping scriptsmanagerbackend.exe
+2026-02-28 19:28:40 - ProcessKill 6224
+2026-02-28 19:28:41 - Shutdown exception
+Message:A system shutdown is in progress. (Exception from HRESULT: 0x8007045B)
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2026-02-28 19:29:48 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-02-28 19:29:52 - Started 4320
+2026-03-18 03:20:13 - Starting C:\Program Files\nodejs\node.exe  --harmony D:\Software\backend\node_modules\node-windows\lib\wrapper.js --file D:\Software\backend\src\index.js --scriptoptions= --log "Scripts Manager Backend wrapper" --grow 0.25 --wait 10 --maxrestarts 3 --abortonerror n --stopparentfirst undefined --maxretries 10
+2026-03-18 03:20:13 - Started 12120
