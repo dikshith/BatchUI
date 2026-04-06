@@ -11,6 +11,7 @@ import { UserInfoComponent } from './components/user-info/user-info';
 import { PythonProfileModule } from './components/python-profile/python-profile.module';
 import { PythonProfileComponent } from './components/python-profile/python-profile';
 import { authGuard } from './guards/auth.guard';
+import { ZopeAnalyserComponent } from './components/zope-analyser/zope-analyser';
 
 export const routes: Routes = [
   {
@@ -56,7 +57,6 @@ export const routes: Routes = [
   {
     path: 'connect-server',
     component: ConnectServerComponent,
-    /* canActivate: [authGuard], */
   },
   {
     path: 'logs',
@@ -68,7 +68,11 @@ export const routes: Routes = [
     component: PythonProfileComponent,
     canActivate: [authGuard],
   },
-  {
+  { path: 'zope-analyser',
+    component: ZopeAnalyserComponent,
+    canActivate: [authGuard],
+  },
+    {
     path: '**',
     redirectTo: '',
   },

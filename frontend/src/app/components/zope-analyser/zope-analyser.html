@@ -1,0 +1,174 @@
+<div class="scripts-section">
+
+  <!-- HEADER -->
+  <div class="section-header">
+    <div class="header-left">
+      <p class="section-description">Analyse Zope memory leak CSV files — drop one or more files to get started</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-outline" *ngIf="analysed" (click)="reset()">
+        <span class="icon">⟳</span> Load Another File
+      </button>
+    </div>
+  </div>
+
+  <!-- DROP ZONE -->
+  <div *ngIf="!analysed"
+    class="dropzone"
+    (drop)="onFileDrop($event)"
+    (dragover)="onDragOver($event)"
+    (click)="fileInput.click()">
+    <div class="drop-icon">📂</div>
+    <p><b>Click to browse</b> or drag & drop one or more CSV files here</p>
+    <p class="drop-sub">memory_leak_&lt;node&gt;_&lt;pid&gt;.csv — multiple files supported</p>
+    <div class="file-list" *ngIf="fileNames.length">
+      <span *ngFor="let f of fileNames">✅ {{ f }}</span>
+    </div>
+    <input #fileInput type="file" accept=".csv" multiple style="display:none" (change)="onFileSelect($event)">
+  </div>
+
+  <!-- DASHBOARD -->
+  <div *ngIf="analysed" class="content-wrapper">
+
+    <!-- KPI Cards -->
+    <div class="kpi-row">
+      <div class="kpi-card" [ngClass]="growthClass">
+        <div class="kpi-label">Total Memory Growth</div>
+        <div class="kpi-val">+{{ totalGrowth }} MB</div>
+        <div class="kpi-sub">{{ firstMB.toFixed(1) }} → {{ currentMB.toFixed(1) }} MB</div>
+      </div>
+      <div class="kpi-card" [ngClass]="rateClass">
+        <div class="kpi-label">Leak Rate</div>
+        <div class="kpi-val">{{ leakRate }} MB/min</div>
+        <div class="kpi-sub">Projected over session</div>
+      </div>
+      <div class="kpi-card orange">
+        <div class="kpi-label">Object Count Growth</div>
+        <div class="kpi-val">+{{ objGrowth.toLocaleString() }}</div>
+        <div class="kpi-sub">GC not collecting</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-label">Real Requests</div>
+        <div class="kpi-val">{{ realRequests }}</div>
+        <div class="kpi-sub">Waitress noise filtered</div>
+      </div>
+      <div class="kpi-card" [ngClass]="memClass">
+        <div class="kpi-label">Current Memory</div>
+        <div class="kpi-val">{{ currentMB.toFixed(1) }} MB</div>
+        <div class="kpi-sub">Latest reading</div>
+      </div>
+    </div>
+
+    <!-- Tab Nav -->
+    <nav class="tab-nav">
+      <button class="tab-btn" [class.active]="activeTab === 'verdict'"  (click)="activeTab = 'verdict'">Summary</button>
+      <button class="tab-btn" [class.active]="activeTab === 'suspects'" (click)="activeTab = 'suspects'">Suspects</button>
+      <button class="tab-btn" [class.active]="activeTab === 'rawlog'"   (click)="activeTab = 'rawlog'">Raw Log</button>
+    </nav>
+
+    <!-- VERDICT -->
+    <div *ngIf="activeTab === 'verdict'" class="tab-content">
+      <div class="verdict-box">
+        <h2 class="verdict-title">🔴 Memory Leak Detected — {{ totalGrowth }} MB growth over {{ durationMins.toFixed(1) }} minutes</h2>
+        <p class="verdict-text">
+          Memory is growing at <b style="color:#ff9933">{{ leakRate }} MB/minute</b>.
+          Object count grew by <b style="color:#ff9933">{{ objGrowth.toLocaleString() }}</b> objects —
+          confirming the garbage collector is not reclaiming memory between requests.
+        </p>
+        <p class="suspects-title">Top Suspects:</p>
+        <div class="suspect-item" *ngFor="let s of top3; let i = index">
+          <b>{{ medal(i) }} {{ s.cls }}.{{ s.method }}</b> —
+          <span style="color:#ff9933">+{{ s.growth }} MB growth</span>,
+          {{ s.calls }} call(s), max {{ s.maxMB.toFixed(1) }} MB<br>
+          <span class="suspect-url">{{ s.url }}</span>
+        </div>
+        <p class="verdict-note">
+          ℹ️ Waitress health check pings (waitress.invalid) excluded.
+          Loaded from: <b style="color:#4a9eff">{{ nodes }}</b>
+        </p>
+      </div>
+    </div>
+
+    <!-- SUSPECTS -->
+    <div *ngIf="activeTab === 'suspects'" class="tab-content">
+      <div class="notice">⚡ <b>Waitress health checks filtered out</b> — showing real application requests only.</div>
+      <div class="table-container">
+        <div class="table-header">Memory Growth Per Endpoint</div>
+        <div class="tbl-filter">
+          <input [(ngModel)]="suspectFilter" (input)="filterSuspects()" placeholder="Filter by class, method or URL...">
+        </div>
+        <div class="suspect-list">
+          <div class="suspect-row" *ngFor="let s of filteredSuspects">
+            <div class="suspect-left">
+              <span class="badge" [ngClass]="s.sev">{{ s.sev.toUpperCase() }}</span>
+              <div class="suspect-name">
+                <span class="cls">{{ s.cls }}</span><span class="dot">.</span><span class="method">{{ s.method }}</span>
+                <span class="suspect-url-inline" [title]="s.url">{{ shortUrl(s.url) }}</span>
+              </div>
+            </div>
+            <div class="suspect-stats">
+              <div class="stat">
+                <span class="stat-label">Growth</span>
+                <span class="stat-val" [style.color]="growthColor(s.growth)"><b>+{{ s.growth }} MB</b></span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Max MB</span>
+                <span class="stat-val">{{ s.maxMB.toFixed(1) }}</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Calls</span>
+                <span class="stat-val">{{ s.calls }}</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Obj Δ</span>
+                <span class="stat-val">+{{ s.objGrowth.toLocaleString() }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RAW LOG -->
+    <div *ngIf="activeTab === 'rawlog'" class="tab-content">
+      <div class="table-container">
+        <div class="table-header">All Requests</div>
+        <div class="tbl-filter">
+          <input [(ngModel)]="rawFilter" (input)="filterRaw()" placeholder="Filter by any column...">
+        </div>
+        <div class="raw-list">
+          <div class="raw-row" *ngFor="let r of filteredRaw">
+            <div class="raw-left">
+              <span class="badge" [ngClass]="rowSev(r)">{{ rowSev(r).toUpperCase() }}</span>
+              <div class="raw-info">
+                <div class="raw-name">
+                  <span class="cls">{{ r.cls }}</span><span class="dot">.</span><span class="method">{{ r.method }}</span>
+                </div>
+                <span class="raw-url" [title]="r.url">{{ shortUrl(r.url) }}</span>
+              </div>
+            </div>
+            <div class="raw-stats">
+              <div class="stat">
+                <span class="stat-label">Node</span>
+                <span class="stat-val">{{ r.node }}</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">MB</span>
+                <span class="stat-val">{{ r.mb.toFixed(2) }}</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Objects</span>
+                <span class="stat-val">{{ r.objs.toLocaleString() }}</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Time</span>
+                <span class="stat-val ts-val">{{ r.ts }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
